@@ -20,15 +20,15 @@ _ft_cat:
 	
 print_buffer:
 	syscall
-	cmp	rax, 1		;if error || 0 byte read
-	jl	return
-        mov	rdi, 1		;stdout
+	jc	return		;if error
+        cmp	rax, 0		;0 byte read
+	je	return
+	mov	rdi, 1		;stdout
 	lea	rsi, [rel buffer]
 	mov	rdx, rax
 	mov	rax, 0x2000004	;write
 	syscall
-        cmp	rax, -1		;if error
-	je	return
+        jc	return
 	mov	rdi, r12
 	lea	rsi, [rel buffer]
 	mov	rdx, buff_size
