@@ -6,7 +6,7 @@
 /*   By: aalves <aalves@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 14:02:15 by aalves            #+#    #+#             */
-/*   Updated: 2019/02/25 20:34:06 by aalves           ###   ########.fr       */
+/*   Updated: 2019/02/25 22:28:42 by aalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void *ft_memset(void *b, int c, size_t len);
 void *ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 char *ft_strdup(const char *s1);
 void *ft_cat(int fd);
+void *ft_memalloc(size_t n);
+int ft_is_power_of_two(size_t n);
+size_t ft_log2(size_t n);
 
 int ft_bzero_check()
 {
@@ -236,6 +239,52 @@ int ft_cat_check()
 	int fd = open("./Makefile", O_RDONLY);
 	ft_cat(fd);
 	close(fd);
+    ft_cat(-42);
+	return (0);
+}
+
+int ft_memalloc_check()
+{
+	char *toto = ft_memalloc(512);
+	for (int i = 0; i < 512; ++i)
+	{
+		if (toto[i] != 0)
+		{
+			printf("ft_memalloc : failed at %d\n", i);
+			return (1);
+		}
+	}
+	free(toto);
+    return (0);
+}
+
+int ft_is_power_of_two_check()
+{
+    if (!ft_is_power_of_two(1) ||
+		!ft_is_power_of_two(2) ||
+		!ft_is_power_of_two(8) ||
+		!ft_is_power_of_two(256) ||
+		!ft_is_power_of_two(4096) ||
+		ft_is_power_of_two(6) ||
+		ft_is_power_of_two(7) ||
+	 	ft_is_power_of_two(66) ||
+		ft_is_power_of_two(654))
+	{
+		printf("ft_is_power_of_two : failed\n");
+		return (1);
+	}
+	return (0);
+}
+
+int ft_log2_check()
+{
+	if (1 != ft_log2(1) ||
+		2 != ft_log2(3) ||
+		9 != ft_log2(258))
+	{
+		printf("ft_log2 : failed %lu\n", ft_log2(1));
+		return (1);
+	}
 	return (0);
 }
 
@@ -256,6 +305,9 @@ int	main ()
 			ft_memset_check() ||
             ft_memcpy_check() ||
 			ft_strdup_check() ||
-			ft_cat_check()
+			ft_cat_check() ||
+			ft_memalloc_check() ||
+			ft_is_power_of_two_check() ||
+			ft_log2_check()
 			);
 }

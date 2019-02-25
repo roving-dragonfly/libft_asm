@@ -22,7 +22,10 @@ SRC=	srcs/ft_bzero.s \
 	srcs/ft_memset.s \
 	srcs/ft_memcpy.s \
 	srcs/ft_strdup.s \
-	srcs/ft_cat.s
+        srcs/ft_cat.s \
+        srcs/ft_memalloc.s \
+        srcs/ft_is_power_of_two.s \
+	srcs/ft_log2.s
 
 OBJ= $(SRC:.s=.o)
 
