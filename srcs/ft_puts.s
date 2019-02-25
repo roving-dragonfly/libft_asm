@@ -12,8 +12,8 @@ _ft_puts:
 	je	null
 	jmp	strlen
 null:
-	mov	rdi, no_ptr	;if null ptr, set specific string
-	
+        lea	rdi, [rel no_ptr]
+	;; if null ptr load (null) str
 strlen:
         cmp	[rdi + rdx], byte 0	;if !*s
 	je	print
@@ -21,19 +21,19 @@ strlen:
 	jmp	strlen
         
 print:
-	push	rbp
-	mov	rbp, rsp
+	push	rbp		;needed to keep alignement
+	mov	rbp, rsp	;~~
         mov	rax, 0x2000004	;write
 	mov	rsi, rdi
         mov	rdi, 1		;stdout
 	syscall
         mov	rax, 0x2000004	;write
-	mov	rsi, newline
+        lea	rsi, [rel newline]
         mov	rdi, 1		;stdout
 	mov	rdx, 1
 	syscall
 	mov	rax, 1
-	pop rbp
+	pop	rbp		;set the pointer back
 	ret
 
 section .data

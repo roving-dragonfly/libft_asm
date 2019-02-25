@@ -6,7 +6,7 @@
 /*   By: aalves <aalves@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 14:02:15 by aalves            #+#    #+#             */
-/*   Updated: 2019/02/23 19:42:19 by aalves           ###   ########.fr       */
+/*   Updated: 2019/02/25 20:34:06 by aalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 #define SEED 123123123
 
@@ -27,6 +29,11 @@ int ft_isprint(int c);
 int ft_toupper(int c);
 int ft_tolower(int c);
 int ft_puts(const char *s);
+size_t ft_strlen(const char *s);
+void *ft_memset(void *b, int c, size_t len);
+void *ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
+char *ft_strdup(const char *s1);
+void *ft_cat(int fd);
 
 int ft_bzero_check()
 {
@@ -50,9 +57,9 @@ int ft_strcat_check()
 {
 	char toto[512];
 
-	strcpy(toto, "kikou");
-	ft_strcat(toto, " lol");
-	if (strcmp(toto, "kikou lol"))
+	strcpy(toto, "ayy");
+	ft_strcat(toto, " lmao");
+	if (strcmp(toto, "ayy lmao"))
 	{
         printf("ft_strcat : final string > %s\n", toto);
 		return (1);
@@ -153,10 +160,82 @@ int ft_tolower_check()
 
 int ft_puts_check()
 {
-	puts("test string");
-	ft_puts("test string");
+	puts("puts test string");
+	ft_puts("puts test string");
 	puts(NULL);
 	ft_puts(NULL);
+	return (0);
+}
+
+int ft_strlen_check()
+{
+	if (ft_strlen("ayy lmao") != strlen("ayy lmao") ||
+		ft_strlen("") != strlen(""))
+	{
+		printf("ft_strlen : failed");
+		return (1);
+	}
+	return (0);
+}
+
+int ft_memset_check()
+{
+	char toto[256];
+
+	for (int i = 0; i < 256; ++i)
+        toto[i] = (char)(rand() % 255);
+	if (ft_memset(toto, '4', 256) != toto)
+	{
+		printf("ft_memset : wrong return value \n");
+		return (1);
+	}
+
+    for (int i = 0; i < 256; ++i)
+	{
+		if (toto[i] != '4')
+		{
+			printf("ft_memset : failed at %d\n", i);
+			return (1);
+		}
+	}
+	return (0);
+}
+
+int ft_memcpy_check()
+{
+	char toto[256];
+	char titi[256];
+
+    for (int i = 0; i < 256; ++i)
+        toto[i] = (char)(rand() % 255);
+	for (int i = 0; i < 256; ++i)
+        titi[i] = (char)(rand() % 255);
+	ft_memcpy(toto, titi, 256);
+	if (memcmp(toto, titi, 256))
+	{
+		printf("ft_memcpy : failed\n");
+		return (1);
+	}
+	return (0);
+}
+
+int ft_strdup_check()
+{
+	char *str = "ayy lmao";
+	char *toto = ft_strdup(str);
+	if (strcmp(str, toto))
+	{
+		printf("ft_strdup : failed, str = %s\n", toto);
+        return (1);
+	}
+	return (0);
+}
+
+int ft_cat_check()
+{
+	int fd = open("./Makefile", O_RDONLY);
+	ft_cat(fd);
+	close(fd);
 	return (0);
 }
 
@@ -172,6 +251,11 @@ int	main ()
 			ft_isprint_check() ||
 			ft_toupper_check() ||
             ft_tolower_check() ||
-			ft_puts_check()
+            ft_puts_check() ||
+			ft_strlen_check() ||
+			ft_memset_check() ||
+            ft_memcpy_check() ||
+			ft_strdup_check() ||
+			ft_cat_check()
 			);
 }

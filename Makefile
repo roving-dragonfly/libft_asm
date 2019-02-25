@@ -9,7 +9,7 @@ LINKER= ld
 LINKER_FLAGS= -macosx_version_min 10.8 -lSystem
 
 SRC=	srcs/ft_bzero.s \
-        srcs/ft_strcat.s \
+	srcs/ft_strcat.s \
         srcs/ft_isalpha.s \
         srcs/ft_isdigit.s \
 	srcs/ft_isalnum.s \
@@ -17,7 +17,12 @@ SRC=	srcs/ft_bzero.s \
 	srcs/ft_isprint.s \
         srcs/ft_toupper.s \
 	srcs/ft_tolower.s \
-	srcs/ft_puts.s 
+	srcs/ft_puts.s \
+	srcs/ft_strlen.s \
+	srcs/ft_memset.s \
+	srcs/ft_memcpy.s \
+	srcs/ft_strdup.s \
+	srcs/ft_cat.s
 
 OBJ= $(SRC:.s=.o)
 

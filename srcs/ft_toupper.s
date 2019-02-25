@@ -13,7 +13,7 @@ _ft_toupper:
 	jg	nochange
         mov	rax, rdi
 	sub	rax, 32
-	ret
+        ret
 	
 nochange:
 	mov	rax, rdi
