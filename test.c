@@ -6,7 +6,7 @@
 /*   By: aalves <aalves@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:27:00 by aalves            #+#    #+#             */
-/*   Updated: 2019/02/26 13:27:00 by aalves           ###   ########.fr       */
+/*   Updated: 2019/02/26 13:43:06 by aalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int ft_toupper_check()
 {
 	for (int i = 0; i < 256; ++i)
 	{
-		if (!ft_toupper(i) != !toupper(i))
+		if (ft_toupper(i) != toupper(i))
 		{
 			printf("ft_toupper : failed for %d\n", i);
 			return (1);
@@ -154,7 +154,7 @@ int ft_tolower_check()
 {
 	for (int i = 0; i < 256; ++i)
 	{
-		if (!ft_tolower(i) != !tolower(i))
+		if (ft_tolower(i) != tolower(i))
 		{
 			printf("ft_tolower : failed for %d\n", i);
 			return (1);
