@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aalves <aalves@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/23 14:02:15 by aalves            #+#    #+#             */
-/*   Updated: 2019/02/26 11:40:27 by aalves2019/02/26 11:39:07 by aalves           ###   ########.fr       */
+/*   Created: 2019/02/26 13:27:00 by aalves            #+#    #+#             */
+/*   Updated: 2019/02/26 13:27:00 by aalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,9 +313,10 @@ int ft_memcmp_check()
 	if (ft_memcmp(toto, toto, 256) != memcmp(toto, toto, 256) ||
 		ft_memcmp(toto, titi, 256) != memcmp(toto, titi, 256))
 	{
-		printf("ft_memcmp : failed %d %d\n", ft_memcmp(toto, titi, 256), memcmp(toto, titi, 256));
+        printf("ft_memcmp : failed\n");
 		return (1);
 	}
+    
 	return (0);
 }
 
