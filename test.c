@@ -6,7 +6,7 @@
 /*   By: aalves <aalves@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 14:02:15 by aalves            #+#    #+#             */
-/*   Updated: 2019/02/25 22:28:42 by aalves           ###   ########.fr       */
+/*   Updated: 2019/02/26 11:40:27 by aalves2019/02/26 11:39:07 by aalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void *ft_cat(int fd);
 void *ft_memalloc(size_t n);
 int ft_is_power_of_two(size_t n);
 size_t ft_log2(size_t n);
+size_t ft_max(size_t a, size_t b);
+int ft_memcmp(const void *s1, const void *s2, size_t n);
 
 int ft_bzero_check()
 {
@@ -288,6 +290,35 @@ int ft_log2_check()
 	return (0);
 }
 
+int ft_max_check()
+{
+	if (5 != ft_max(4, 5) ||
+        45 != ft_max(45, 5) ||
+		0 != ft_max(0, 0))
+	{
+		printf("ft_max : failed\n");
+        return (1);
+	}
+	return (0);
+}
+
+int ft_memcmp_check()
+{
+    char toto[256];
+	char titi[256];
+
+    for (int i = 0; i < 256; ++i)
+        toto[i] = (char)(rand() % 255);
+    memcpy(titi, toto, 242);
+	if (ft_memcmp(toto, toto, 256) != memcmp(toto, toto, 256) ||
+		ft_memcmp(toto, titi, 256) != memcmp(toto, titi, 256))
+	{
+		printf("ft_memcmp : failed %d %d\n", ft_memcmp(toto, titi, 256), memcmp(toto, titi, 256));
+		return (1);
+	}
+	return (0);
+}
+
 int	main ()
 {
     srand(SEED);
@@ -308,6 +339,8 @@ int	main ()
 			ft_cat_check() ||
 			ft_memalloc_check() ||
 			ft_is_power_of_two_check() ||
-			ft_log2_check()
+			ft_log2_check() ||
+			ft_max_check() ||
+			ft_memcmp_check()
 			);
 }
